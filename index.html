@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Booking System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">🍽️ TableBook</div>
+        <span id="headerUser">Restaurant Reservation System</span>
+        <button id="logoutBtn" class="btn light hidden" onclick="logout()">Logout</button>
+    </header>
+
+    <main class="container">
+        <section id="authSection" class="auth-card">
+            <h1>Welcome to TableBook</h1>
+            <p class="muted">Book your favourite table easily.</p>
+
+            <div class="tabs">
+                <button id="loginTab" class="tab active" onclick="showAuth('login')">Login</button>
+                <button id="registerTab" class="tab" onclick="showAuth('register')">Register</button>
+                <button id="adminTab" class="tab" onclick="showAuth('admin')">Admin</button>
+            </div>
+
+            <form id="loginForm">
+                <label>Email</label>
+                <input id="loginEmail" type="email" required placeholder="Enter your email">
+                <label>Password</label>
+                <input id="loginPassword" type="password" required placeholder="Enter password">
+                <button class="btn primary full" type="submit">Login</button>
+            </form>
+
+            <form id="registerForm" class="hidden">
+                <label>Full Name</label>
+                <input id="registerName" required maxlength="60" placeholder="Enter your name">
+                <label>Email</label>
+                <input id="registerEmail" type="email" required placeholder="Enter your email">
+                <label>Password</label>
+                <input id="registerPassword" type="password" required minlength="6" placeholder="At least 6 characters">
+                <label>Confirm Password</label>
+                <input id="confirmPassword" type="password" required placeholder="Re-enter password">
+                <button class="btn primary full" type="submit">Create Account</button>
+            </form>
+
+            <form id="adminForm" class="hidden">
+                <label>Admin Username</label>
+                <input id="adminUsername" required placeholder="Username">
+                <label>Admin Password</label>
+                <input id="adminPassword" type="password" required placeholder="Password">
+                <button class="btn primary full" type="submit">Admin Login</button>
+                <p class="hint">Demo login: admin / Admin@123</p>
+            </form>
+            <p id="authMessage" class="message" role="status"></p>
+        </section>
+
+        <section id="customerSection" class="hidden">
+            <div class="welcome">
+                <div>
+                    <h1>Hello, <span id="customerName"></span>! 👋</h1>
+                    <p class="muted">Reserve a table for your next visit.</p>
+                </div>
+                <div class="stat">
+                    <span>My active bookings</span>
+                    <strong id="myBookingCount">0</strong>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Book a Table</h2>
+                <form id="bookingForm" class="booking-grid">
+                    <div>
+                        <label>Booking Date</label>
+                        <input id="bookingDate" type="date" required>
+                    </div>
+                    <div>
+                        <label>Time</label>
+                        <select id="bookingTime" required>
+                            <option value="">Select time</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="13:00">1:00 PM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                            <option value="18:00">6:00 PM</option>
+                            <option value="19:00">7:00 PM</option>
+                            <option value="20:00">8:00 PM</option>
+                            <option value="21:00">9:00 PM</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Number of Guests</label>
+                        <input id="guestCount" type="number" min="1" max="8" required value="2">
+                    </div>
+                    <div>
+                        <label>Select Table</label>
+                        <select id="tableNumber" required>
+                            <option value="">Select a table</option>
+                        </select>
+                    </div>
+                    <div class="form-action">
+                        <button class="btn primary full" type="submit">Confirm Booking</button>
+                    </div>
+                </form>
+                <p id="bookingMessage" class="message" role="status"></p>
+            </div>
+
+            <div class="panel">
+                <div class="section-heading">
+                    <div>
+                        <h2>Table Availability</h2>
+                        <p class="muted">Choose a date and time to check availability.</p>
+                    </div>
+                    <button class="btn light" onclick="renderTables()">Refresh</button>
+                </div>
+                <div id="tableGrid" class="table-grid"></div>
+            </div>
+
+            <div class="panel">
+                <div class="section-heading">
+                    <h2>My Booking History</h2>
+                    <input id="customerSearch" class="search" placeholder="Search my bookings...">
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th><th>Date</th><th>Time</th><th>Table</th>
+                                <th>Guests</th><th>Status</th><th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customerBookings"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="adminSection" class="hidden">
+            <div class="welcome">
+                <div>
+                    <h1>Admin Dashboard</h1>
+                    <p class="muted">Manage restaurant bookings and customers.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat"><span>Total Bookings</span><strong id="totalBookings">0</strong></div>
+                <div class="stat"><span>Active Bookings</span><strong id="activeBookings">0</strong></div>
+                <div class="stat"><span>Cancelled Bookings</span><strong id="cancelledBookings">0</strong></div>
+                <div class="stat"><span>Registered Customers</span><strong id="totalCustomers">0</strong></div>
+            </div>
+
+            <div class="panel">
+                <div class="section-heading">
+                    <h2>All Bookings</h2>
+                    <div class="actions">
+                        <input id="adminSearch" class="search" placeholder="Search bookings...">
+                        <button class="btn primary" onclick="exportCSV()">Export CSV</button>
+                    </div>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th><th>Customer</th><th>Email</th><th>Date</th>
+                                <th>Time</th><th>Table</th><th>Guests</th><th>Status</th><th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminBookings"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Registered Customers</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Name</th><th>Email</th><th>Joined</th></tr></thead>
+                        <tbody id="adminCustomers"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>TableBook © 2026 | Student Project</footer>
+    <script src="script.js"></script>
+</body>
+</html>

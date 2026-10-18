@@ -1,0 +1,405 @@
+
+:root {
+    --purple: #6c45d9;
+    --purple-dark: #4f2cb0;
+    --purple-light: #f1edff;
+    --text: #29243b;
+    --muted: #77738a;
+    --border: #e6e1f0;
+    --white: #ffffff;
+    --green: #168653;
+    --red: #c9364c;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f8f7fc;
+    color: var(--text);
+}
+
+.topbar {
+    background: var(--white);
+    min-height: 72px;
+    padding: 16px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.brand {
+    color: var(--purple);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.container {
+    width: min(1120px, 92%);
+    margin: 32px auto;
+    min-height: 70vh;
+}
+
+h1, h2, p {
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+h2 {
+    font-size: 21px;
+    margin-bottom: 18px;
+}
+
+.muted, .hint {
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.hint {
+    font-size: 13px;
+    margin: 14px 0 0;
+}
+
+.auth-card {
+    max-width: 460px;
+    margin: 30px auto;
+    background: var(--white);
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 8px 30px #33205c0a;
+}
+
+.auth-card h1 {
+    margin-bottom: 10px;
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin: 24px 0;
+    background: #f4f1fa;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.tab {
+    flex: 1;
+    padding: 11px 6px;
+    border: 0;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--muted);
+    font-weight: bold;
+}
+
+.tab.active {
+    color: var(--purple);
+    background: white;
+    box-shadow: 0 2px 8px #0000000c;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 14px 0 7px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    font: inherit;
+    background: white;
+    color: var(--text);
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px #6c45d91a;
+}
+
+.btn {
+    border: 0;
+    border-radius: 9px;
+    padding: 11px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.primary {
+    background: var(--purple);
+    color: white;
+}
+
+.primary:hover {
+    background: var(--purple-dark);
+}
+
+.light {
+    background: var(--purple-light);
+    color: var(--purple-dark);
+}
+
+.full {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.message {
+    margin: 14px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.message.success {
+    color: var(--green);
+}
+
+.message.error {
+    color: var(--red);
+}
+
+.welcome, .section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.welcome {
+    margin-bottom: 26px;
+}
+
+.welcome h1 {
+    margin-bottom: 8px;
+}
+
+.panel {
+    background: white;
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    margin-bottom: 24px;
+    box-shadow: 0 5px 20px #33205c06;
+}
+
+.booking-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 18px;
+}
+
+.form-action {
+    display: flex;
+    align-items: end;
+}
+
+.form-action .btn {
+    margin-top: 14px;
+}
+
+.stat {
+    background: var(--purple-light);
+    border-radius: 13px;
+    padding: 18px 22px;
+    min-width: 150px;
+}
+
+.stat span {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.stat strong {
+    font-size: 28px;
+    color: var(--purple-dark);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.table-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.table-card {
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: white;
+}
+
+.table-card h3 {
+    margin: 0 0 8px;
+}
+
+.table-card p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.available {
+    color: var(--green);
+    font-weight: bold;
+}
+
+.unavailable {
+    color: var(--red);
+    font-weight: bold;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 680px;
+    font-size: 14px;
+}
+
+th, td {
+    padding: 13px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+th {
+    color: var(--muted);
+    background: #faf9fd;
+}
+
+tbody tr:hover {
+    background: #fcfbff;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status.active {
+    background: #e2f7ec;
+    color: #147447;
+}
+
+.status.cancelled {
+    background: #ffe8eb;
+    color: #b32d42;
+}
+
+.cancel-btn {
+    border: 0;
+    border-radius: 7px;
+    padding: 7px 10px;
+    background: #ffe8eb;
+    color: #b32d42;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.search {
+    width: min(260px, 100%);
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.empty {
+    color: var(--muted);
+    text-align: center;
+    padding: 24px;
+}
+
+footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media (max-width: 750px) {
+    .topbar {
+        padding: 14px 4%;
+        flex-wrap: wrap;
+    }
+
+    .brand {
+        font-size: 20px;
+    }
+
+    .container {
+        margin: 20px auto;
+    }
+
+    .auth-card, .panel {
+        padding: 19px;
+    }
+
+    .booking-grid, .table-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stat {
+        min-width: 0;
+        padding: 14px;
+    }
+
+    .stat strong {
+        font-size: 24px;
+    }
+
+    .section-heading {
+        align-items: stretch;
+    }
+
+    .search {
+        width: 100%;
+    }
+}
